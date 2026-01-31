@@ -1,0 +1,3 @@
+# PDEex1f
+print('Hello word')
+# comentari1 1

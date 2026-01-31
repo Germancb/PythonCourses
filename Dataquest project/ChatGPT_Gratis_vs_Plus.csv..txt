@@ -1,0 +1,9 @@
+Característica,Gratis 💸,Plus 💎 (20 USD/mes)
+Modelo disponible,GPT-3.5,GPT-4.1 + GPT-3.5
+Velocidad de respuesta,Normal, a veces lento en horas pico,Prioridad → más rápido
+Disponibilidad,Limitada en horas pico,Acceso estable y prioritario
+Generación de imágenes (DALL·E 3),❌ No disponible,✅ Sí (crear y editar imágenes)
+Generación de video (Sora),❌ No disponible,✅ Acceso gradual
+Crear GPTs personalizados,❌ No disponible,✅ Sí (GPTs + Crear)
+Memoria de conversaciones,Básica,Mejor manejo de contexto y memoria
+Precio,Gratis,20 USD/mes (~80.000 COP)

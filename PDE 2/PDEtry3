@@ -1,0 +1,10 @@
+b = input("Entre un número o fin para terminar: ")
+try:
+    b1 = float(b)
+except:
+    if b == "fin":
+       print("Fin del programa")
+    else:
+       print("El valor no es válido", b)
+    
+print("se acabó:   ")

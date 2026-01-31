@@ -1,0 +1,1 @@
+print(mydb.list_collection_names())

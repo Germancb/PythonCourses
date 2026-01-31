@@ -1,0 +1,52 @@
+import collections  #impc.py corre
+import random
+Pcard=collections.namedtuple('card', ['suit', 'rank'])
+
+class Pdc:
+    ranks=[str(rank) for rank in range(2,11)]+ ["J","Q", "K", "A"]
+    suits= ['Spades', 'Diamonds', 'Hearts', 'Clubs']
+    print(ranks)
+    def __init__(self):
+        self._cards=[Pcard(self.ranks, suit)  for suit in self.suits]
+        print(self._cards)
+
+p2=Pdc()
+print(p2)
+resultado
+'2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+[card(suit=['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'], rank='Spades'), card(suit=['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'], rank='Diamonds'), card(suit=['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'], rank='Hearts'), card(suit=['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'], rank='Clubs')]
+<__main__.Pdc object at 0x0000018A398E9850>
+
+import collections   # impc2 corre
+import random
+
+Pcard=collections.namedtuple('card', ['suit', 'rank'])
+ranks=[str(rank) for rank in range(2,11)]+ ["J","Q", "K", "A"]
+suits= ['Spades', 'Diamonds', 'Hearts', 'Clubs']
+rank=0
+# uit='Spades'
+sc=[Pcard(ranks, suit)  for suit in suits]
+print(sc)
+
+resultado
+[card(suit=['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'], rank='Spades'), card(suit=['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'], rank='Diamonds'), card(suit=['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'], rank='Hearts'), card(suit=['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'], rank='Clubs')]
+
+from collections import namedtuple   # impc3 corre
+# Declaring namedtuple()
+Student = namedtuple('Student', ['name', 'age', 'DOB'])   # 3 campos named Student por 'Student'
+# Adding values
+S = Student('Nandini', '19', '2541997')
+# Access using index
+print("The Student age using index is : ", end="")
+print(S[1])
+# Access using name
+print("The Student name using keyname is : ", end="")
+print(S.name)
+# Access using getattr()
+print("The Student DOB using getattr() is : ", end="")
+print(getattr(S, 'DOB'))
+
+Resultado
+The Student age using index is : 19
+The Student name using keyname is : Nandini
+he Student DOB using getattr() is : 2541997

@@ -1,0 +1,106 @@
+from tkinter import *   #interface 13
+root=Tk()
+varOpcion=IntVar()
+
+def imprimir():
+    print(varOpcion.get())
+
+Label(root, text="Genero:").pack()
+
+Radiobutton(root, text="Masculino", variable=varOpcion,value=1, command=imprimir).pack()
+
+Radiobutton(root, text="Femenino", variable=varOpcion,value=2, command=imprimir).pack()
+root.mainloop() 
+
+interface14
+from tkinter import *
+root=Tk()
+varOpcion=IntVar()
+
+def imprimir():
+#   print(varOpcion.get())
+    if varOpcion.get()==1:
+        etiqueta.config(text="Has elegido Masculino: ")
+    elif varOpcion.get()==2:
+        etiqueta.config(text="Has elegido Femenino: ")
+    else:
+        etiqueta.config(text="Has elegido Otras: ")
+
+Label(root, text="Genero:").pack()
+Radiobutton(root, text="Masculino  ", variable=varOpcion,value=1, command=imprimir).pack()
+Radiobutton(root, text="Femenino  ", variable=varOpcion,value=2, command=imprimir).pack()
+Radiobutton(root, text="Otras opciones", variable=varOpcion,value=3, command=imprimir).pack()
+etiqueta=Label(root)
+etiqueta.pack()
+
+root.mainloop() 
+
+interface15
+rom tkinter import *
+root=Tk()
+root.title("Ejemplo")
+
+playa=IntVar()
+montagna=IntVar()
+turismoRural=IntVar()
+
+def opcionesViaje():
+    opcionEscogida=""
+    if(playa.get()==1):
+        opcionEscogida+=" playa"
+    if(montagna.get()==1):
+        opcionEscogida+=" montaña"
+    if(turismoRural.get()==1):
+        opcionEscogida+=" Turismo Rural"
+
+    textoFinal.config(text=opcionEscogida)
+#Foto=PhotoImage(file="happynyear2023.png")
+# Label(root, image=Foto).pack()
+
+frame=Frame(root)
+frame.pack()
+Label(frame, text="Elige destinos: ").pack()
+
+Checkbutton(frame, text="Playa", variable=playa,onvalue=1, offvalue=0, command=opcionesViaje).pack()
+Checkbutton(frame, text="Montaña", variable=montagna, onvalue=1,offvalue=0, command=opcionesViaje).pack()
+Checkbutton(frame, text="Turismo rural", variable=turismoRural, onvalue=1, offvalue=0, command=opcionesViaje).pack()
+textoFinal=Label(frame)
+textoFinal.pack()
+
+root.mainloop()
+
+interface16
+from tkinter import *
+from tkinter import messagebox
+root=Tk()
+
+def infoAdicional():
+    messagebox.showinfo("Procesador de German", "Procesador texto v 2023")   # dos parametros
+
+barraMenu=Menu(root)
+root.config(menu=barraMenu, width=300, height=300)
+
+archivoMenu=Menu(barraMenu, tearoff=0)  #tearoff desaparce la lagrima ----
+archivoMenu.add_command(label="Nuevo")
+archivoMenu.add_command(label="Guardar")
+archivoMenu.add_command(label="Guardar Como")
+archivoMenu.add_separator()
+archivoMenu.add_command(label="Cerrar")
+archivoMenu.add_command(label="Salir")
+
+archivoEdicion=Menu(barraMenu, tearoff=0)
+archivoEdicion.add_command(label="Copiar")
+archivoEdicion.add_command(label="Cortar")
+archivoEdicion.add_command(label="Pegar")
+
+archivoHerramientas=Menu(barraMenu)
+
+archivoAyuda=Menu(barraMenu, tearoff=0)
+archivoAyuda.add_command(label="Licencia")
+archivoAyuda.add_command(label="Acerca de ...")
+
+barraMenu.add_cascade(label="Archivo", menu=archivoMenu)
+barraMenu.add_cascade(label="Edicion", menu=archivoEdicion)
+barraMenu.add_cascade(label="Herramientas", menu=archivoHerramientas)
+barraMenu.add_cascade(label="Ayuda", menu=archivoAyuda)
+root.mainloop()

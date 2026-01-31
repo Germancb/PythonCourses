@@ -1,0 +1,7 @@
+while True:
+    try:
+        b = int(input("enter a value: "))
+        break
+    except  ValueError:
+        print("Value is not valid")
+print("fin", b)

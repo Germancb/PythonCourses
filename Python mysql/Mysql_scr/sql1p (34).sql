@@ -1,0 +1,1 @@
+SELECT orderNumber, status, IF(status= "Shipped", 'despachado', 'Otro') FROM classicalmodels.orders 

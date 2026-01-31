@@ -1,0 +1,1 @@
+SELECT orderdetails.productCode, productName, buyPrice, MSRP, count(*) FROM orderdetails JOIN products ON orderdetails.productCode=products.productCode group by orderdetails.productCode

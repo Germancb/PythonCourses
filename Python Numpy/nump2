@@ -1,0 +1,21 @@
+# We can create a NumPy ndarray object by using the array() function
+import numpy as np
+arr = np.arange(1, 6)
+print(arr)
+print(type(arr))           #            -> [1, 2, 3, 4, 5)    class ‘numpy.ndarray’
+print(arr.size)   # 5
+print(len(arr))   # 5
+
+# Use a tuple to create numpy array
+#import numpy as np
+arr2 = np.array((2, 2, 3, 43, 5))
+print(arr2)
+arr2.sort()
+print(arr2)
+print(arr2[::-1])  # no cambia el arr2 original
+print(arr2, arr2.dtype, arr2.itemsize)    # int32 4
+arr2 = np.array((2, 2, 3, 43, 5), dtype = "i2")
+print(arr2, arr2.dtype, arr2.itemsize)    # int16 2
+
+
+

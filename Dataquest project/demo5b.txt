@@ -1,0 +1,204 @@
+#%% Importar librerías
+import pandas as pd
+imort numpy as np
+import matplotlib.pyplot as plt
+# %matplotlib inline
+
+#%% Cargar datos Data exploration
+star_wars = pd.read_csv("StarWars.csv", encoding="ISO-8859-1")
+print(star_wars.head())
+
+#%% Info datos
+print(star_wars.info())
+
+#%% Ver estructura básica
+print("Tamaño del dataset:", star_wars.shape)   # filas y columnas
+print("Columnas:", star_wars.columns.tolist())  # nombres de columnas
+
+#%% Ejemplo: Histograma de una columna numérica (ajusta el nombre de la columna si existe)
+if "Age" in star_wars.columns:
+    star_wars["Age"].hist(bins=10, edgecolor="black", color="skyblue")
+    plt.xlabel("Edad")
+    plt.ylabel("Frecuencia")
+    plt.title("Distribución de edades - Encuesta Star Wars")
+    plt.show()
+else:
+    print("No existe la columna 'Age' en este dataset.")
+
+star_wars["Have you seen any of the 6 films in the Star Wars franchise?"].value_counts(dropna=False)
+star_wars["Do you consider yourself to be a fan of the Star Wars film franchise?"].value_counts(dropna=False)
+
+#%% Data Cleaning
+yes_no = {"Yes": True, "No": False, True: True, False: False} # True and False keys ensure correct values aren't overwritten if cell is run more than once
+
+for col in [
+    "Have you seen any of the 6 films in the Star Wars franchise?",
+    "Do you consider yourself to be a fan of the Star Wars film franchise?",
+    "Are you familiar with the Expanded Universe?",
+    "Do you consider yourself to be a fan of the Star Trek franchise?"
+    
+    ]:
+    star_wars[col] = star_wars[col].map(yes_no, na_action='ignore')
+
+star_wars["Do you consider yourself to be a fan of the Star Wars film franchise?"].value_counts(dropna=False)
+
+
+movie_mapping = {
+    "Star Wars: Episode I  The Phantom Menace": True,
+    np.nan: False,
+    "Star Wars: Episode II  Attack of the Clones": True,
+    "Star Wars: Episode III  Revenge of the Sith": True,
+    "Star Wars: Episode IV  A New Hope": True,
+    "Star Wars: Episode V The Empire Strikes Back": True,
+    "Star Wars: Episode VI Return of the Jedi": True,
+    True: True,
+    False: False
+}
+
+for col in star_wars.columns[3:9]:
+    star_wars[col] = star_wars[col].map(movie_mapping)
+    
+star_wars.iloc[:,3:9].head()
+
+
+star_wars = star_wars.rename(columns={
+        "Which of the following Star Wars films have you seen? Please select all that apply.": "seen_1",
+        "Unnamed: 4": "seen_2",
+        "Unnamed: 5": "seen_3",
+        "Unnamed: 6": "seen_4",
+        "Unnamed: 7": "seen_5",
+        "Unnamed: 8": "seen_6"
+        })
+
+star_wars.iloc[:,3:9].head()
+
+
+star_wars = star_wars.rename(columns={
+        "Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.": "ranking_ep1",
+        "Unnamed: 10": "ranking_ep2",
+        "Unnamed: 11": "ranking_ep3",
+        "Unnamed: 12": "ranking_ep4",
+        "Unnamed: 13": "ranking_ep5",
+        "Unnamed: 14": "ranking_ep6"
+        })
+
+star_wars.iloc[:,9:15].head()
+
+star_wars.dtypes
+
+#%% Renaming the rest of the columns for completeness's sake...
+star_wars = star_wars.rename(columns={
+    'Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her.': 'Han Solo',
+    'Unnamed: 16': 'Luke Skywalker',
+    'Unnamed: 17': 'Princess Leia Organa',
+    'Unnamed: 18': 'Anakin Skywalker',
+    'Unnamed: 19': 'Obi Wan Kenobi',
+    'Unnamed: 20': 'Emperor Palpatine',
+    'Unnamed: 21': 'Darth Vader',
+    'Unnamed: 22': 'Lando Calrissian',
+    'Unnamed: 23': 'Boba Fett',
+    'Unnamed: 24': 'C-3P0',
+    'Unnamed: 25': 'R2 D2',
+    'Unnamed: 26': 'Jar Jar Binks',
+    'Unnamed: 27': 'Padme Amidala',
+    'Unnamed: 28': 'Yoda'
+})
+
+star_wars.iloc[:,15:29].head()
+
+#%% Analysis Average Ranking for Each Movie
+mean_ranking = star_wars[star_wars.columns[9:15]].mean().sort_values()
+mean_ranking
+
+fig,ax = plt.subplots(figsize=(6,3))
+rankings = ax.barh(mean_ranking.index, mean_ranking, color='#fe9b00')
+
+ax.set_facecolor('#fff4d6')
+ax.set_title('Average Ranking of Each Movie')
+for spine in ['top', 'right', 'bottom', 'left']:
+    ax.spines[spine].set_visible(False)
+ax.invert_yaxis()
+ax.text(2.6,0.35,'*Lowest rank is the most\n liked', fontstyle='italic')
+
+plt.show()
+
+#%% Total Number of Survey Respondents Who Have Seen Each Movie
+total_seen = star_wars[star_wars.columns[3:9]].sum()
+total_seen
+
+# Version 1: simple and quick
+plt.bar(range(6), star_wars[star_wars.columns[3:9]].sum())
+
+# Version 2: optimized for stakeholders
+fig,ax = plt.subplots(figsize=(6,3))
+rankings = ax.barh(total_seen.index, total_seen, color='#ff1947')
+ax.set_facecolor('#fff4d6')
+ax.set_title('Total Respondents Who Have Seen Each Movie')
+ax.set_xlabel("Number of Respondents")
+for spine in ['top', 'right', 'bottom', 'left']:
+    ax.spines[spine].set_visible(False)
+ax.invert_yaxis()
+
+plt.show()
+
+
+#%% Exploring by gender
+males = star_wars[star_wars["Gender"] == "Male"]
+females = star_wars[star_wars["Gender"] == "Female"]
+
+display(males.head(2))
+display(females.head(2))
+
+male_ranking_avgs=males[males.columns[9:15]].mean()
+female_ranking_avgs = females[females.columns[9:15]].mean()
+
+male_tot_seen = males[males.columns[3:9]].sum()
+female_tot_seen = females[females.columns[3:9]].sum()
+
+for mean_stats in [male_ranking_avgs, female_ranking_avgs, male_tot_seen, female_tot_seen]:
+    display(mean_stats)
+
+ind = np.arange(6)
+height = 0.35
+offset = ind + height
+
+fig,ax = plt.subplots(1, 2, figsize=(8,4))
+malebar = ax[0].barh(ind, male_ranking_avgs, color='#fe9b00', height=height)
+femalebar = ax[0].barh(offset, female_ranking_avgs, color='#c94402', height=height)
+ax[0].set_facecolor('#fff4d6')
+ax[0].set_title('Movie Rankings by Gender')
+ax[0].set_yticks(ind + height / 2)
+ax[0].set_yticklabels(('Episode 1', 'Episode 2', 'Episode 3', 'Episode 4', 'Episode 5',
+                   'Episode 6'))
+ax[0].set_xlabel('Average Ranking')
+ax[0].legend((malebar[0], femalebar[0]), ('Men', 'Women'),bbox_to_anchor=[-0.3,1])
+ax[0].invert_yaxis()
+
+male2bar = ax[1].barh(ind, male_tot_seen, color='#ff1947', height=height)
+female2bar = ax[1].barh(offset, female_tot_seen, color='#9b052d', height=height)
+ax[1].set_facecolor('#fff4d6')
+ax[1].set_title('# of Respondents by Gender')
+ax[1].set_yticks([])
+ax[1].set_xlabel('Number of Respondents')
+
+ax[1].legend((male2bar[0], female2bar[0]), ('Men', 'Women'),bbox_to_anchor=[1,1])
+ax[1].invert_yaxis()
+
+for a in ax:
+    for spine in ['top', 'right', 'bottom', 'left']:
+        a.spines[spine].set_visible(False)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+interface1
+from tkinter import *   # libreria tkinder
+raiz=Tk()
+raiz.title("Ventana de Pruebas")
+raiz.resizable(0,0)  # No se puede redimensionar la ventana Fañse False width heigh
+# raiz.iconbitmap("gato.icon")  para que aparezca el gato si esta en folder graficos ext .ico
+raiz.geometry("650x350")
+raiz.config(bg="blue")
+raiz.mainloop()
+
+interface2
+from tkinter import *   # libreria tkinder
+raiz=Tk()
+raiz.title("Ventana de Pruebas")
+# raiz.resizable(0,0)  # No se puede redimensionar la ventana Fañse False width heigh
+# raiz.iconbitmap("gato.icon")  para que aparezca el gato si esta en folder graficos ext .ico
+raiz.geometry("750x450")
+raiz.config(bg="blue")
+
+miFrame=Frame()
+# miFrame.pack(side="bottom")
+miFrame.pack(side="left", anchor="n")   # arriba y a la izquierda
+miFrame.config(bg="red")
+miFrame.config(width="650", height="350")
+raiz.mainloop()
+
+interface3
+from tkinter import *   # libreria tkinder
+raiz=Tk()
+raiz.title("Ventana de Pruebas")
+# raiz.iconbitmap("gato.icon")  para que aparezca el gato si esta en folder graficos ext .ico
+raiz.geometry("750x450")
+raiz.config(bg="blue")
+
+miFrame=Frame()
+# miFrame.pack(side="bottom")
+miFrame.pack(side="left", anchor="n")   # arriba y a la izquierda
+miFrame.config(bg="red")
+miFrame.config(width="650", height="350")
+miFrame.config(bd=35)
+miFrame.config(relief="groove")
+miFrame.config(cursor="hand2")
+raiz.mainloop()
+
+interface4
+from tkinter import *
+root=Tk()
+miFrame=Frame(root, width=500, height=400)
+miFrame.pack()
+# miImagen=PhotoImage(file="mouse.gif")  =reemplazar mouse.gif ->ruta de la imagen
+miImagen=PhotoImage(file="happynyear2023.png")   
+miLabel=Label(miFrame, image=miImagen).place(x=100, y=200)
+# miLabel.place(x=100, y=200)  #sitio del texto  distancias en pixeles
+# Label(miFrame,text="Hola alumnos de Python").place(x=200,y=400) 
+root.mainloop()
+

@@ -1,0 +1,1 @@
+SELECT payments.customerNumber, customerName, count(*), sum(amount) FROM payments JOIN customers on payments.customerNumber=customers.customerNumber group by customerNumber

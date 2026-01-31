@@ -1,0 +1,1 @@
+select customers.customerNumber, customerName, count(*) from customers JOIN orders On customers.customerNumber=orders.customerNumber group by customerNumber

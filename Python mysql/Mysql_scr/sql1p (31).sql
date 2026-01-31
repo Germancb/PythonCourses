@@ -1,0 +1,1 @@
+select customerNumber, customerName from customers where customerNumber not in  (select customerNumber from orders group by customerNumber)

@@ -1,0 +1,1 @@
+SELECT customerNumber, sum(quantityOrdered*priceEach) $ordered, count(*) FROM orders, orderdetails where orders.orderNumber=orderdetails.orderNumber group by customerNumber order by customerNumber
